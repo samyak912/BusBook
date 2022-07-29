@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+    <nav class="navbar">
+		<div class="logo">JSY BOOKINGS</div>
+		<ul class="nav-links">
+		  <div class="menu">
+			<li class="services"><a href="index.html">Book Tickets</a></li>
+			<li class="profile"><a href="login.html">Login/Register</a></li>
+		  </div>
+		</ul>
+	</nav>
+    <div class="signup-form">
+		<form action="login.html" onsubmit="return validateForm1()" name="myForms" style="margin-top: 50px;">
+			<h3><center>Register</center></h3>
+			
+			<div class="form-group">
+    			Full Name:<input type="text" class="form-control" name="fullname" placeholder="Enter Name">
+    			
+    		</div>
+    		<div class="form-group">
+    			Email/Username:<input type="email" class="form-control" name="email" placeholder="Enter Email">
+    			
+    		</div>
+    		<div class="form-group">
+    			<label for="gen">Gender:</label>
+				<select id="gen" class="form-control" name="gender">
+                    <option value="0">--Select--</option>
+  					<option value="Male">Male</option>
+  					<option value="Female">Female</option>
+				</select>
+			</div>
+			<div class="form-group">
+    			Password:<input type="text" class="form-control" name="pass" placeholder="Enter Password">
+    			
+    		</div>
+    		<div class="form-group">
+    			Phone:<input type="number" class="form-control" name="phone" placeholder="Enter Phone Number">
+    			
+    		</div>
+    			<a href="index.html" class="btn btn-danger" style="color:white; background: red !important; padding: 5px; border: 2px solid black;">CANCEL</a>
+    			<input type="submit" name="register" class="btn btn-success" value="REGISTER" style="float: right; height: 35px; padding: 5px; margin-top: -6px;"/>
+    			
+    	</form>
+    	<div class="text-center">Already have an account? <a href="login.html">Sign in</a></div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    function validateForm1() {
+        let fname = document.forms["myForms"]["fullname"].value;
+        let regex2 = new RegExp("^[A-Za-z]+$");
+        if (fname == "") {
+            alert("Name must be filled out");
+            return false;
+        }
+        else if(regex2.test(fname)===false){
+            alert("Name should not contain numeric values");
+            return false;
+        }
+        else if(fname.length<3 || fname.length>30){
+            alert("Name must be 3 to 30 characters long");
+            return false;
+        }
+
+        let ename = document.forms["myForms"]["email"].value;
+        if (ename == "") {
+            alert("Email must be filled out");
+            return false;
+        }
+        else if(!ename.includes('@') || ename.endsWith('@')){
+            alert("Please enter valid email");
+            return false;
+        }
+
+        let e = document.getElementById("gen");
+        let gender = e.options[e.selectedIndex].value;
+        if(gender==0){
+            alert("Gender is required");
+            return false;
+        }
+
+        let pass = document.forms["myForms"]["pass"].value;
+        let regx=new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$");
+        if (pass == "") {
+            alert("Password must be filled out");
+            return false;
+        }
+        else if(regx.test(pass)==false){
+            alert("Password should be 6 to 12 characters long<br>Password should have atleast<br>1 Capital Letter, 1 Number, Small Letters, 1 Special Symbol");
+            return false;
+        }
+
+        let phone = document.forms["myForms"]["phone"].value;
+        let regex1=new RegExp("^[0-9]{10}$");
+        if (phone == "") {
+            alert("Phone must be filled out");
+            return false;
+        }
+        else if(regex1.test(phone)===false){
+            alert("mobile number must be 10 digits number");
+            return false;
+        }
+
+
+    }
+</script>

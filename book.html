@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="css/home.css">
+    <title>Book Ticket</title>
+    <style>
+        .signup-form .form-group {
+            margin-bottom: 20px !important;
+            display: inline-block !important;
+            width: 40% !important;
+            /* justify-content: space-between; */
+            margin-left: 32px !important;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+		<div class="logo">JSY BOOKINGS</div>
+		<ul class="nav-links">
+		  <div class="menu">
+			<li class="services"><a href="index.html">Book Tickets</a></li>
+			<li class="profile"><a href="login.html">Login/Register</a></li>
+		  </div>
+		</ul>
+	</nav>
+    <div class="signup-form">
+        <form onsubmit="return formValidate()" name="myForms" action="" style="margin-top: 50px;">
+            <h3 style="margin-bottom: 15px;"><center>BUS DETAILS</center></h3>
+            <div class="form-group">	
+                <label>Busname:</label>
+                <input type="text" name=""  value="MH02BQ11199" class="form-control" readonly>
+            </div>
+            <div class="form-group">	
+                <label>Date of Journey:</label>
+                <input type="text" id="date1" name=""  class="form-control" readonly>
+            </div>
+            <div class="form-group">	
+                <label>Source:</label>
+                <input type="text" id="source" name=""  class="form-control" readonly>
+            </div>
+            <div class="form-group">	
+                <label>Destination:</label>
+                <input type="text" id="destination" name="" class="form-control" readonly>
+            </div>
+            <div class="form-group">	
+                <label>Departure time:</label>
+                <input type="text" name="" value="8:00 AM" class="form-control" readonly>
+            </div>
+            <div class="form-group">	
+                <label>Arrival time:</label>
+                <input type="text" value="2:00 PM" class="form-control" readonly>
+            </div>
+            
+            <div class="form-group">	
+                <label>Passengers:</label>
+                <input type="text" id="passengers" name="passengers" class="form-control">
+            </div>
+            <div class="form-group">	
+                <label>Price:</label>
+                <input type="text" readonly id="prices" class="form-control">
+            </div>
+            <br>
+            
+                <a href="javascript:history.go(-1)"><input type="button" class="btn btn-danger" style="color:white; margin-top: -3px; margin-left: 30px; height: 35px; padding: 5px; background: red;" value="BACK"></a>	
+                <input type="submit" name="ticket"  class="btn btn-success" value="PAY & BOOK" style="float:right; margin-right:50px; height:35px; padding:5px;">
+            
+            
+        </form>
+    </div>
+
+    <script>
+        var currentUrl = window.location.href;
+        let paramaters = (new URL(currentUrl)).searchParams;
+        var sources = paramaters.get("source1");
+        document.getElementById("source").value=sources;
+        var destinations = paramaters.get("destination1");
+        document.getElementById("destination").value=destinations;
+        var dates = paramaters.get("date");
+        document.getElementById("date1").value=dates;
+
+        /*var price=100;
+        $(document).ready(function(){
+        $('#passengers').on('keyup',function(){
+            quantity=$(this).val();
+            total_price=price*quantity;
+            $('#prices').val(total_price);
+        });
+        });*/
+        $(document).ready(function(){
+        $('#passengers').on('keyup',function(){
+        if(this.value>=6){
+            alert("Passenger should be less than 5");
+            $('#passengers').val('');
+        }
+        else{
+        var tot = 105 * this.value;
+        $('#prices').val(tot);
+        }
+    });
+});
+
+    function formValidate(){
+        let passenger = document.forms["myForms"]["passengers"].value;
+        if (passenger == "") {
+            alert("Minimum Passenger should be 1");
+            return false;
+        }
+        else{
+            alert("Ticket Booked successfully");
+            window.location.href="index.html"; 
+        }
+    }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>User Login</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="css/home.css">
+</head>
+<body onload="loopRun()">
+	<nav class="navbar">
+		<div class="logo">JSY BOOKINGS</div>
+		<ul class="nav-links">
+		  <div class="menu">
+			<li class="services"><a href="index.html">Book Tickets</a></li>
+			<li class="profile"><a href="login.html">Login/Register</a></li>
+		  </div>
+		</ul>
+	</nav>
+	<div class="signup-form">
+	    <form onsubmit="return formValidate()" name="myForms" action="book.html" style="margin-top: 50px;">
+	    	<h3><center>Search For Bus</center></h3>
+	    	<div class="form-group">
+	    		<label for="cars">Source:</label>
+
+				<select id="source1" class="form-control" name="source1">
+					<option value="0">--Select--</option>
+	  				<option value="Mumbai">Mumbai</option>
+					<option value="Pune">Pune</option>
+				</select>
+			
+			</div>
+
+			<div class="form-group">
+	    		<label for="cars">Destination:</label>
+
+				<select id="dest1" class="form-control" name="destination1">
+					<option value="0">--Select--</option>
+					<option value="Mumbai">Mumbai</option>
+				  	<option value="Pune">Pune</option>
+				</select>
+				
+			</div>
+
+			<div class="form-group">
+				<label>Date:</label>
+				<input type="date" name="date" class="form-control" id="date1" name="date1">
+				
+			</div>
+
+			<div class="form-group">
+			<input type="submit" class="search-bus" name="search" value="Search">
+			</div>
+		</form>
+	</div>
+
+	
+	<div class="slideshow">
+		<img src="images/bus2.jpg" id="slides" style="width: 100%;">
+		<a href="#" onclick="changeImg(-1); return false;" style="margin-left: 634px;"><i class="fa fa-arrow-circle-left" style="font-size:36px"></i>
+		</a>
+		<a href="#" onclick="changeImg(1); return false;"><i class="fa fa-arrow-circle-right" style="font-size:36px"></i>
+		</a>
+	</div>
+	<br><br>
+	<h2 class="offertitle">OUR OFFERS</h2> 
+	<hr class="offerbreak">
+	<div class="offers">
+		<div class="offer1">
+			<img src="images/refer.jpg" class="offerimg">
+			<p class="offertxt">Get upto 40% off on your first Booking</p>
+			<p class="offercode">Use Code: <b>BOOK40</b></p>
+		</div>
+		<div class="offer1">
+			<img src="images/today.jpg" class="offerimg">
+			<p class="offertxt">Book tickets today and save upto Rs 200</p>
+			<p class="offercode">Use Code: <b>BOOKTODAY</b></p>
+		</div>
+		<div class="offer1">
+			<img src="images/paytm.jpg" class="offerimg">
+			<p class="offertxt">Pay with Paytm and get upto Rs 100 cashback</p>
+			<p class="offercode">Use Code: <b>PAYPAYTM</b></p>
+		</div>
+	</div>
+	<script>
+
+	
+	var images=["images/bus2.jpg","images/bus3.jpg","images/bus4.jpg","images/bus5.jpg"];
+	var imgno=0;
+	var imglen=images.length-1;
+
+	function changeImg(a){
+		imgno+=a;
+
+		if(imgno>imglen){
+			imgno=0;
+		}
+		if(imgno<0){
+			imgno=imglen;
+		}
+		document.getElementById("slides").src=images[imgno];
+
+		return false;
+	}
+	function loopRun(){
+		setInterval("changeImg(1)",2000);
+	}
+
+	function formValidate(){
+    let e = document.getElementById("source1");
+    let sources = e.options[e.selectedIndex].value;
+    if(sources==0){
+        alert("Source is required");
+        return false;
+    }
+    let f = document.getElementById("dest1");
+    let dest = f.options[f.selectedIndex].value;
+    if(dest==0){
+        alert("Destination is required");
+        return false;
+    }
+
+    if(sources==dest){
+        alert("Source & Destination cannot be same");
+        return false;
+    }
+
+    let dates= document.forms["myForms"]["date1"].value;
+    if(dates==''){
+        alert("Date is required");
+        return false;
+    }
+    var ToDate = new Date();
+
+    if (new Date(dates).getTime() < ToDate.getTime()) {
+          alert("Please Enter a valid Date");
+          return false;
+     }
+    
+}
+	</script>
+	
+</body>
+</html>
